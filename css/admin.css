@@ -1,0 +1,51 @@
+/* 관리자 페이지 전용 스타일 */
+.admin-window { max-width: 1320px; }
+.login-box { max-width: 420px; margin: 50px auto; text-align: center; }
+.login-box .lock-ico { font-size: 46px; width: 84px; height: 84px; display: grid; place-items: center; margin: 0 auto 16px; background: var(--accent-soft); border-radius: 24px; }
+.login-box h2 { font-size: 24px; margin-bottom: 6px; }
+.login-box form { margin-top: 22px; display: grid; gap: 10px; }
+.login-box input { width: 100%; border: 1.5px solid var(--line-2); border-radius: 12px; padding: 13px 15px; outline: 0; }
+.login-box input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(53, 99, 255, .1); }
+.login-err { color: var(--danger); font-weight: 700; font-size: 14px; min-height: 20px; }
+.login-note { margin-top: 16px; font-size: 13px; color: var(--muted); background: var(--soft); border-radius: 12px; padding: 10px 12px; text-align: left; }
+
+.admin-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.admin-head h2 { font-size: 24px; }
+.admin-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+.kpis { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 22px; }
+.kpi { background: var(--soft); border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; }
+.kpi span { display: block; font-size: 13px; color: var(--muted); font-weight: 700; }
+.kpi b { display: block; font-size: 28px; letter-spacing: -0.03em; margin-top: 2px; }
+.kpi small { color: var(--muted); font-size: 12.5px; }
+
+.admin-section { margin-bottom: 26px; }
+.admin-section h3 { font-size: 17px; margin-bottom: 10px; }
+.tbl-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; }
+.tbl { width: 100%; border-collapse: collapse; font-size: 14px; }
+.tbl th, .tbl td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+.tbl th { background: #f3f6fd; font-size: 13px; color: var(--ink-2); position: sticky; top: 0; }
+.tbl tbody tr:last-child td { border-bottom: 0; }
+.tbl tbody tr.clickable { cursor: pointer; }
+.tbl tbody tr.clickable:hover td { background: var(--accent-soft); }
+.tbl td.num, .tbl th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.bar { display: inline-block; vertical-align: middle; width: 70px; height: 7px; background: var(--line); border-radius: 99px; margin-right: 8px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--accent); border-radius: 99px; }
+.tag { display: inline-block; font-size: 12px; font-weight: 800; padding: 2px 9px; border-radius: 99px; }
+.tag.ok { background: var(--success-soft); color: var(--success); }
+.tag.ng { background: var(--danger-soft); color: var(--danger); }
+.tag.pending { background: #fff6e5; color: #b7791f; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.filters select, .filters input { border: 1.5px solid var(--line-2); border-radius: 10px; padding: 8px 12px; background: #fff; outline: 0; }
+.filters input { min-width: 220px; }
+.empty-state { text-align: center; padding: 40px 10px; color: var(--muted); }
+
+.detail-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.detail-meta div { background: var(--soft); border-radius: 12px; padding: 10px 12px; }
+.detail-meta span { display: block; font-size: 12px; color: var(--muted); font-weight: 700; }
+.detail-meta b { font-size: 14.5px; }
+.wrong-list { margin: 0 0 16px; padding: 10px 14px; background: var(--danger-soft); border-radius: 12px; font-size: 14px; color: #a12c30; }
+
+@media (max-width: 900px) {
+  .kpis { grid-template-columns: repeat(2, 1fr); }
+  .detail-meta { grid-template-columns: 1fr 1fr; }
+}

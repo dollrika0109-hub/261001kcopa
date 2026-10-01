@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>모의신고 훈련 · 관리자</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <div class="desktop">
+    <main class="window admin-window">
+      <div class="titlebar">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="tab"><span class="tab-ico">🔐</span>모의신고 훈련 · 관리자</div>
+        <div class="titlebar-spacer"></div>
+      </div>
+      <div class="toolbar">
+        <div class="addressbar"><span class="lock">🔒</span><span>관리자 › 결과 대시보드</span></div>
+        <div class="mode-pill" id="modePill"></div>
+        <button class="btn ghost sm" id="logoutBtn" hidden>로그아웃</button>
+      </div>
+      <div class="screen" id="adminScreen"></div>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="modal" hidden>
+    <div class="modal wide" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-titlebar">
+        <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
+        <h3 id="modalTitle"></h3>
+        <button class="modal-close" data-close aria-label="닫기">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-foot" id="modalFoot"></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="assertive"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data/content.js"></script>
+  <script src="js/data/forms.js"></script>
+  <script src="js/data/cases.js"></script>
+  <script src="js/render-shared.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
