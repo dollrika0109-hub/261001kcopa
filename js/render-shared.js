@@ -10,7 +10,7 @@ window.Render = (function () {
   function paragraphs(arr) { return (arr || []).map(function (p) { return '<p>' + rich(p) + '</p>'; }).join(''); }
 
   function fileIcon(type) {
-    return { kv: '🧾', chat: '💬', table: '📊', text: '📄' }[type] || '📄';
+    return { kv: '🧾', chat: '💬', table: '📊', text: '📄', transcript: '🎙️' }[type] || '📄';
   }
 
   function material(m) {
@@ -33,6 +33,14 @@ window.Render = (function () {
           m.rows.map(function (r, i) {
             return '<tr class="' + (hl.indexOf(i) > -1 ? 'hl' : '') + '">' + r.map(function (c) { return '<td>' + rich(c) + '</td>'; }).join('') + '</tr>';
           }).join('') + '</tbody></table></div></div>';
+      case 'transcript':
+        return '<div class="mat mat-transcript">' + cap +
+          (m.meta ? '<dl class="tr-meta">' + m.meta.map(function (r) { return '<div><dt>' + esc(r[0]) + '</dt><dd>' + rich(r[1]) + '</dd></div>'; }).join('') + '</dl>' : '') +
+          '<div class="tr-lines">' + m.lines.map(function (l) {
+            return l.note ? '<p class="tr-note">' + rich(l.note) + '</p>' :
+              '<div class="tr-line' + (l.highlight ? ' hl' : '') + '">' + (l.time ? '<span class="tr-time">' + esc(l.time) + '</span>' : '') +
+              '<b class="tr-who">' + esc(l.who) + '</b><span class="tr-text">' + rich(l.text) + '</span></div>';
+          }).join('') + '</div></div>';
       default:
         return '<div class="mat mat-text">' + cap + paragraphs(m.paragraphs) + '</div>';
     }

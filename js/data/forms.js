@@ -19,7 +19,7 @@
 
   function person(prefix) {
     return [
-      { id: prefix + '_name', label: '성명', type: 'text', width: 'third', placeholder: '예) 홍길동' },
+      { id: prefix + '_name', label: '성명', type: 'text', width: 'third', placeholder: '예) 김보호' },
       { id: prefix + '_dept', label: '소속', type: 'text', width: 'third', placeholder: '예) ○○부' },
       { id: prefix + '_position', label: '직위(직급)', type: 'text', width: 'third', placeholder: '예) 주임' }
     ];
@@ -84,7 +84,7 @@
       sections: [
         { title: '신고자', fields: person('reporter') },
         { title: '금품등을 제공한 자', fields: [
-          { id: 'giver_name', label: '성명', type: 'text', width: 'third', placeholder: '예) 홍길동' },
+          { id: 'giver_name', label: '성명', type: 'text', width: 'third', placeholder: '예) 김보호' },
           { id: 'giver_job', label: '직업(소속)', type: 'text', width: 'third', placeholder: '예) ○○업체 담당자' },
           { id: 'giver_contact', label: '연락처', type: 'text', width: 'third', placeholder: '예) 010-0000-0000' }
         ] },
@@ -115,7 +115,7 @@
       description: '직무관련자가 본인의 사적이해관계자임을 알게 된 경우 (신고 및 회피 신청)',
       sections: [
         { title: '신고·신청인', fields: [
-          { id: 'reporter_name', label: '성명', type: 'text', width: 'half', placeholder: '예) 홍길동' },
+          { id: 'reporter_name', label: '성명', type: 'text', width: 'half', placeholder: '예) 김보호' },
           { id: 'reporter_dept', label: '소속', type: 'text', width: 'half', placeholder: '예) ○○부' },
           { id: 'reporter_position', label: '직위(직급)', type: 'text', width: 'half', placeholder: '예) 주임' },
           { id: 'reporter_duty', label: '담당업무', type: 'text', width: 'half', placeholder: '예) ○○ 업무' }
@@ -141,7 +141,7 @@
       sections: [
         { title: '신고인', fields: person('reporter') },
         { title: '직무관련자(퇴직자)', fields: [
-          { id: 'retiree_name', label: '성명', type: 'text', width: 'half', placeholder: '예) 홍길동' },
+          { id: 'retiree_name', label: '성명', type: 'text', width: 'half', placeholder: '예) 김보호' },
           { id: 'retiree_contact', label: '연락처', type: 'text', width: 'half', placeholder: '예) 010-0000-0000' },
           { id: 'retiree_current_org', label: '현 소속 기관', type: 'text', width: 'half', placeholder: '예) ○○업체' },
           { id: 'retiree_prev_org', label: '퇴직 전 소속 기관', type: 'text', width: 'half', placeholder: '예) 한국저작권보호원 ○○부' },

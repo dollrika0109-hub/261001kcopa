@@ -161,7 +161,7 @@
       '</section>' +
       (CFG.participant.required ?
         '<section class="panel participant"><div class="panel-head"><h2 class="panel-title">👤 참가자 정보</h2><p class="muted">' + esc(C.messages.participantGuide) + '</p></div>' +
-        '<div class="p-grid"><label class="pfield" data-p="name"><span>성명</span><input id="pName" type="text" autocomplete="name" placeholder="예) 홍길동" value="' + esc(S.participant.name) + '"></label>' +
+        '<div class="p-grid"><label class="pfield" data-p="name"><span>성명</span><input id="pName" type="text" autocomplete="name" placeholder="예) 김보호" value="' + esc(S.participant.name) + '"></label>' +
         '<label class="pfield" data-p="dept"><span>소속</span><input id="pDept" type="text" placeholder="예) ○○부" value="' + esc(S.participant.dept) + '"></label></div></section>' : '') +
       '<div class="category-grid">' + C.categories.map(function (cat) {
         return '<button type="button" class="category-card tone-' + cat.tone + '" data-cat="' + cat.id + '">' +
@@ -519,7 +519,6 @@
       overlay.hidden = true;
       S.submitting = false;
       go(7);
-      updateModePill();
     });
   }
 
@@ -541,7 +540,7 @@
         case 'example': openExample(); break;
         case 'submitForm': if (validateForm()) go(6); break;
         case 'send': send(); break;
-        case 'home': S.category = null; S.caseId = null; go(1); break;
+        case 'home': goHome(); break;
         case 'another': S.caseId = null; go(2); break;
       }
     }
@@ -562,16 +561,27 @@
     var d = new Date(), p = function (n) { return String(n).padStart(2, '0'); };
     document.getElementById('clock').innerHTML = '<b>' + p(d.getHours()) + ':' + p(d.getMinutes()) + '</b><small>' + d.getFullYear() + '. ' + (d.getMonth() + 1) + '. ' + d.getDate() + '.</small>';
   }
-  function updateModePill() {
-    Store.getMode().then(function (m) {
-      var el = document.getElementById('modePill');
-      var label = { local: '💾 이 PC에 저장', server: '🌐 서버 저장', supabase: '☁️ 클라우드 저장', gsheet: '📗 구글 시트 저장' }[m] || m;
-      el.textContent = label;
-      el.className = 'mode-pill mode-' + m;
-    });
+  /* 어느 화면에서나 메인화면으로 이동 */
+  function goHome() {
+    S.category = null; S.caseId = null; S.answers = {}; S.selectedFormId = null;
+    go(1);
   }
+  document.getElementById('homeBtn').addEventListener('click', function () {
+    if (S.submitting) return;
+    if (S.step === 1) { window.scrollTo(0, 0); return; }
+    var hasInput = Object.keys(S.answers).some(function (k) { var v = S.answers[k]; return Array.isArray(v) ? v.length : String(v || '').trim(); });
+    if (S.step >= 5 && S.step <= 6 && hasInput) {
+      openModal({
+        title: '🏠 메인화면으로 이동',
+        body: '<p>' + esc(C.messages.leaveConfirm) + '</p>',
+        foot: '<button class="btn ghost" data-close>계속 작성하기</button><button class="btn primary" id="confirmHome">메인화면으로</button>'
+      });
+      document.getElementById('confirmHome').addEventListener('click', function () { closeModal(); goHome(); });
+      return;
+    }
+    goHome();
+  });
 
   tickClock(); setInterval(tickClock, 30000);
-  updateModePill();
   render();
 })();

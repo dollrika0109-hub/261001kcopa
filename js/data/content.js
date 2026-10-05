@@ -31,7 +31,7 @@ window.CONTENT = {
       icon: '📋',
       tone: 'teal',
       question: '본인에게 신고·회피 등의 의무가 발생했나요?',
-      examples: '수수금지 금품 등 수수 · 사적이해관계자',
+      examples: '수수금지 금품 등 수수 · 사적이해관계자 · 퇴직자 사적접촉',
       button: '본인 신고하기',
       caseIds: ['case04', 'case05', 'case06']
     }
@@ -41,7 +41,7 @@ window.CONTENT = {
   formOrder: ['conduct', 'gapjil', 'gift', 'privateInterest', 'retiree'],
 
   messages: {
-    participantGuide: '결과 집계를 위해 참가자 정보를 입력해 주세요. (신고서 작성 내용과는 별개입니다)',
+    participantGuide: '결과 집계 및 청렴 마일리지 부여를 위해 참가자 정보를 입력해주세요. (익명으로 참여할 수 있으나, 성명을 정확히 기재하지 않을 경우 청렴 마일리지는 부여되지 않습니다)',
     participantMissing: '참가자 성명과 소속을 먼저 입력해 주세요.',
     caseGuide: '체험할 상황을 선택하세요. 각 CASE에서 당신은 상황 속 당사자가 됩니다.',
     situationNext: '상황을 확인했습니다 · 신고유형 선택',
@@ -55,6 +55,7 @@ window.CONTENT = {
     incompleteDetail: '아래 항목을 확인해 주세요. 해당 칸이 빨간색으로 표시됩니다.',
     reviewTitle: '신고 내용을 확인해 주세요',
     reviewSubtitle: '아래 내용으로 모의신고를 접수합니다. 수정이 필요하면 「수정하기」를 눌러 주세요.',
+    leaveConfirm: '작성 중인 내용이 저장되지 않고 사라집니다. 메인화면으로 이동할까요?',
     mockNotice: '본 신고는 교육용 모의신고로, 실제 신고로 접수되지 않습니다.',
     exampleNotice: '작성 예시입니다. 참고만 하시고 신고서는 직접 작성해 주세요.',
     sendingSteps: ['신고서를 전송하고 있습니다…', '신고 내용을 확인하고 있습니다…', '접수번호를 발급하고 있습니다…']
@@ -71,11 +72,11 @@ window.CONTENT = {
     title: '실제 신고가 필요하다면?',
     body: [
       '모의신고 훈련은 실제 신고로 접수되지 않습니다.',
-      '실제 부정부패, 행동강령 위반행위, 갑질 또는 신고가 필요한 상황을 인지한 경우 아래 신고 절차를 이용해 주세요.'
+      '실제 부정부패, 행동강령 위반행위, 갑질 등 신고가 필요한 상황을 인지한 경우 아래 신고 절차를 이용해 주세요.'
     ],
     contacts: [
       { label: '담당부서', value: '검사역' },
-      { label: '담당자', value: '장윤정 주임' }
+      { label: '담당자', value: '이창현 부장, 장윤정 주임' }
     ],
     onlineLabel: '온라인 신고',
     onlinePath: ['한국저작권보호원 누리집', '기관안내', '윤리경영'],

@@ -106,6 +106,12 @@ h1:focus, h2:focus { outline: none; }
 .addressbar #addressText { overflow: hidden; text-overflow: ellipsis; }
 .addressbar .sep { color: #b3bbcf; margin: 0 2px; }
 .lock { font-size: 12px; }
+.home-btn {
+  display: inline-flex; align-items: center; gap: 6px; flex: none;
+  border: 1.5px solid var(--line-2); background: #fff; color: var(--ink-2);
+  font-size: 13.5px; font-weight: 800; padding: 7px 14px; border-radius: 999px; transition: all .2s;
+}
+.home-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 .mode-pill { font-size: 12px; font-weight: 700; padding: 6px 12px; border-radius: 999px; background: var(--soft); color: var(--muted); white-space: nowrap; }
 .mode-pill.mode-server, .mode-pill.mode-supabase { background: var(--success-soft); color: var(--success); }
 .mode-pill.mode-local { background: #fff6e5; color: #b7791f; }
@@ -507,6 +513,8 @@ h1:focus, h2:focus { outline: none; }
   .titlebar { padding: 10px 12px 0; }
   .toolbar { padding: 8px 12px; }
   .nav-btns, .mode-pill { display: none; }
+  .home-btn { padding: 6px 11px; }
+  .home-btn span { display: none; }
   .progress { padding: 12px 16px 10px; }
   .pg-label { display: none; }
   .pg-track { top: 13px; }
@@ -538,3 +546,17 @@ h1:focus, h2:focus { outline: none; }
 @media (prefers-reduced-motion: reduce) {
   .done-badge circle, .done-badge path { stroke-dashoffset: 0; }
 }
+
+/* 녹취록 */
+.tr-meta { margin: 0 0 12px; display: grid; gap: 4px; background: var(--soft); border-radius: 12px; padding: 10px 14px; font-size: 14px; }
+.tr-meta div { display: flex; gap: 12px; }
+.tr-meta dt { width: 64px; flex: none; color: var(--muted); font-weight: 700; }
+.tr-meta dd { margin: 0; font-weight: 600; }
+.tr-lines { border: 1px solid var(--line); border-radius: 14px; padding: 6px 14px; background: #fff; }
+.tr-line { display: grid; grid-template-columns: auto 92px 1fr; gap: 10px; padding: 9px 0; border-bottom: 1px dashed var(--line); font-size: 14.5px; align-items: baseline; }
+.tr-line:last-child { border-bottom: 0; }
+.tr-time { color: #9aa3ba; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+.tr-who { color: var(--ink-2); }
+.tr-line.hl { background: #fff6dc; margin: 0 -14px; padding: 9px 14px; }
+.tr-note { color: var(--muted); font-size: 13px; font-style: italic; padding: 6px 0; text-align: center; border-bottom: 1px dashed var(--line); }
+@media (max-width: 760px) { .tr-line { grid-template-columns: 1fr; gap: 2px; } }
