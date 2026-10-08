@@ -137,6 +137,37 @@
     return '<div class="backbar"><button class="btn text" data-go="' + step + '">← ' + esc(label) + '</button></div>';
   }
 
+  /* 모의신고 훈련 안내문 */
+  function noticeBox(n) {
+    return '<aside class="train-notice" role="note"><span class="tn-ico" aria-hidden="true">📢</span><div class="tn-body"><b>' + esc(n.title) + '</b>' +
+      n.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div></aside>';
+  }
+
+  /* 접수 완료 화면: CASE별 핵심 해설 */
+  function caseGuideBlock(c) {
+    var g = (C.caseGuides || {})[c.id]; if (!g) return '';
+    var laws = (g.laws || []).length ? '<details class="law-drop"><summary>관련 법령 및 내규</summary><div class="law-body">' +
+      g.laws.map(function (l) {
+        return '<div class="law-src">' + esc(l.source) + '</div>' + l.lines.map(function (ln) {
+          var ind = ln.indexOf('> ') === 0;
+          return '<p class="law-line' + (ind ? ' indent' : '') + '">' + R.rich(ind ? ln.slice(2) : ln) + '</p>';
+        }).join('');
+      }).join('') + '</div></details>' : '';
+    return '<section class="guide-card"><h3>💡 CASE ' + esc(c.no) + ' 핵심 해설</h3>' +
+      '<div class="gc-block"><h4>왜 신고가 필요한가요?</h4><p>' + esc(g.why) + '</p></div>' +
+      '<div class="gc-block"><h4>어떻게 신고해야 하나요?</h4>' + g.how.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' +
+      laws + '</section>';
+  }
+
+  /* 접수 완료 화면: 신고서 작성 가이드 */
+  function reportGuideBlock() {
+    var g = C.reportGuide; if (!g) return '';
+    return '<section class="guide-card write-guide"><h3>📝 ' + esc(g.title) + '</h3><ol class="wg-list">' +
+      g.items.map(function (it, i) {
+        return '<li><span class="wg-no">' + (i + 1) + '</span><div><h4>' + esc(it.title) + '</h4><p>' + esc(it.text) + '</p></div></li>';
+      }).join('') + '</ol></section>';
+  }
+
   function materialsBlock(c) {
     if (!c.materials || !c.materials.length) {
       return '<div class="no-materials">📎 이 상황에는 별도의 참고자료가 없습니다. 상황 내용을 꼼꼼히 읽어 보세요.</div>';
@@ -180,6 +211,7 @@
     return backBar('처음으로', 1) +
       '<div class="section-head"><span class="chip tone-' + cat.tone + '">' + cat.icon + ' ' + esc(cat.button) + '</span>' +
       '<h2>체험할 CASE를 선택하세요</h2><p class="muted">' + esc(C.messages.caseGuide) + '</p></div>' +
+      noticeBox(C.notices.caseSelect) +
       '<div class="case-grid">' + list.map(function (c) {
         var isDone = done.indexOf(c.id) > -1;
         return '<button type="button" class="case-card tone-' + cat.tone + '" data-case="' + c.id + '">' +
@@ -268,6 +300,7 @@
       '<section class="write-right"><div class="form-sheet">' +
       '<div class="form-sheet-head"><div><span class="form-kicker">모의신고서 작성</span><h2>' + f.icon + ' ' + esc(f.title) + '</h2></div>' +
       '<button type="button" class="btn ghost sm" data-act="example">🔍 예시보기</button></div>' +
+      noticeBox(C.notices.form) +
       '<p class="form-guide">' + esc(C.messages.formGuide) + '</p>' +
       '<form id="reportForm" novalidate>' + f.sections.map(function (sec, i) {
         return '<fieldset class="fsec"><legend><span class="fsec-no">' + (i + 1) + '</span>' + esc(sec.title) + '</legend>' +
@@ -302,6 +335,8 @@
       '<div class="receipt-row"><span>신고인</span><b>' + esc(S.answers.reporter_name || '-') + '</b></div>' +
       (r.pending ? '<p class="receipt-warn">⚠ ' + esc(C.completion.offlineNotice) + '</p>' : '') +
       '</div>' +
+      '<div class="error-notice" role="note"><span aria-hidden="true">⚠️</span><div><b>' + esc(C.completion.errorNotice.title) + '</b><p>' + esc(C.completion.errorNotice.body) + '</p></div></div>' +
+      caseGuideBlock(c) + reportGuideBlock() +
       '<section class="promo"><h3>📢 ' + esc(rr.title) + '</h3>' + rr.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
       '<div class="promo-grid">' +
       '<div class="promo-box"><h4>☎ 문의</h4><dl>' + rr.contacts.map(function (x) { return '<div><dt>' + esc(x.label) + '</dt><dd>' + esc(x.value) + '</dd></div>'; }).join('') + '</dl></div>' +

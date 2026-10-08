@@ -560,3 +560,34 @@ h1:focus, h2:focus { outline: none; }
 .tr-line.hl { background: #fff6dc; margin: 0 -14px; padding: 9px 14px; }
 .tr-note { color: var(--muted); font-size: 13px; font-style: italic; padding: 6px 0; text-align: center; border-bottom: 1px dashed var(--line); }
 @media (max-width: 760px) { .tr-line { grid-template-columns: 1fr; gap: 2px; } }
+
+/* ---------------------------------------------------------------- 모의신고 훈련 안내문 */
+.train-notice { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 20px; padding: 14px 18px; background: #fff8e8; border: 1px solid #f5dfa8; border-radius: 14px; color: #6f4e0e; text-align: left; }
+.train-notice .tn-ico { font-size: 20px; line-height: 1.4; flex: none; }
+.train-notice b { display: block; font-size: 15px; margin-bottom: 4px; color: #5c3f06; }
+.train-notice p { margin: 0; font-size: 14px; line-height: 1.6; }
+.form-sheet .train-notice { margin: 12px 0 0; }
+
+/* ---------------------------------------------------------------- 접수 완료: 오류 안내 · 해설 · 가이드 */
+.error-notice { display: flex; gap: 12px; align-items: flex-start; max-width: 520px; margin: 22px auto 0; padding: 14px 18px; background: var(--danger-soft); border: 1px solid #f6c9cb; border-radius: 14px; text-align: left; color: #9b2c30; }
+.error-notice > span { font-size: 20px; line-height: 1.4; flex: none; }
+.error-notice b { display: block; margin-bottom: 3px; }
+.error-notice p { margin: 0; font-size: 14px; line-height: 1.6; }
+
+.guide-card { margin-top: 28px; padding: 24px 26px; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow-sm); }
+.guide-card h3 { font-size: 19px; margin-bottom: 14px; }
+.gc-block + .gc-block { margin-top: 14px; }
+.gc-block h4 { font-size: 14.5px; color: var(--accent); margin-bottom: 6px; }
+.gc-block p { margin: 0 0 6px; font-size: 14.5px; line-height: 1.7; color: var(--ink-2); }
+.law-drop { margin-top: 16px; background: var(--soft); border: 1px solid var(--line); border-radius: 12px; }
+.law-drop summary { padding: 11px 16px; cursor: pointer; font-weight: 700; font-size: 14px; color: var(--ink-2); }
+.law-body { padding: 2px 16px 14px; }
+.law-src { font-size: 13px; font-weight: 800; color: var(--muted); margin: 6px 0; }
+.law-line { margin: 0 0 6px; font-size: 13.5px; line-height: 1.7; color: var(--ink-2); }
+.law-line.indent { padding-left: 1.4em; }
+.wg-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.wg-list li { display: flex; gap: 14px; align-items: flex-start; }
+.wg-no { flex: none; width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--accent); color: #fff; font-weight: 800; font-size: 14px; }
+.wg-list h4 { font-size: 15px; margin-bottom: 4px; }
+.wg-list p { margin: 0; font-size: 14.5px; line-height: 1.7; color: var(--ink-2); }
+@media (max-width: 760px) { .guide-card { padding: 20px 16px; } }
