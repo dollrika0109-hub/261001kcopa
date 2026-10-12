@@ -324,9 +324,12 @@
   /* ---------- ⑦ 접수 완료 ---------- */
   VIEWS[7] = function () {
     var c = getCase(), f = getForm(), r = S.result || {}, rr = C.realReport;
+    // 중앙 저장소(구글 시트 등)로 전송되지 않은 경우(전송 실패·임시 저장·로컬 모드) 또는 접수번호 미발급 시에만 오류 안내 표시
+    var failed = !!(r.pending || r.error || r.mode === 'local' || !r.receiptNo);
     return '<div class="done-wrap">' +
-      '<div class="done-badge" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg></div>' +
-      '<h2>' + esc(C.completion.title) + '</h2><p class="muted">' + esc(C.completion.subtitle) + '</p>' +
+      '<div class="done-badge' + (failed ? ' fail' : '') + '" aria-hidden="true"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/>' +
+      (failed ? '<path d="M26 14v16M26 37v1"/>' : '<path d="M15 27l7 7 15-16"/>') + '</svg></div>' +
+      '<h2>' + esc(failed ? C.completion.failTitle : C.completion.title) + '</h2><p class="muted">' + esc(failed ? C.completion.failSubtitle : C.completion.subtitle) + '</p>' +
       '<div class="receipt"><div class="receipt-head">모의신고 접수증</div>' +
       '<div class="receipt-row main"><span>접수번호</span><b class="mono">' + esc(r.receiptNo || '-') + '</b></div>' +
       '<div class="receipt-row"><span>접수일시</span><b>' + esc(R.formatDateTime(r.submittedAt)) + '</b></div>' +
@@ -335,7 +338,7 @@
       '<div class="receipt-row"><span>신고인</span><b>' + esc(S.answers.reporter_name || '-') + '</b></div>' +
       (r.pending ? '<p class="receipt-warn">⚠ ' + esc(C.completion.offlineNotice) + '</p>' : '') +
       '</div>' +
-      '<div class="error-notice" role="note"><span aria-hidden="true">⚠️</span><div><b>' + esc(C.completion.errorNotice.title) + '</b><p>' + esc(C.completion.errorNotice.body) + '</p></div></div>' +
+      (failed ? '<div class="error-notice" role="note"><span aria-hidden="true">⚠️</span><div><b>' + esc(C.completion.errorNotice.title) + '</b><p>' + esc(C.completion.errorNotice.body) + '</p></div></div>' : '') +
       caseGuideBlock(c) + reportGuideBlock() +
       '<section class="promo"><h3>📢 ' + esc(rr.title) + '</h3>' + rr.body.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') +
       '<div class="promo-grid">' +
@@ -544,7 +547,7 @@
     fill.style.transition = 'width ' + total + 'ms cubic-bezier(.3,.6,.4,1)'; fill.style.width = '100%';
     steps.forEach(function (s, i) { setTimeout(function () { text.textContent = s; }, i * total / steps.length); });
     var sub = buildSubmission();
-    Promise.all([Store.submit(sub), wait(total)]).then(function (res) {
+    Promise.all([Promise.resolve().then(function () { return Store.submit(sub); }).catch(function () { return { error: true }; }), wait(total)]).then(function (res) {
       S.result = Object.assign({}, res[0], { submittedAt: sub.submittedAt });
       markCompleted(sub.caseId);
       overlay.classList.add('done');
